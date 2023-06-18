@@ -10,7 +10,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,9 +46,15 @@ public class MovieService {
                 .overview(movie.getOverview())
                 .language(movie.getLanguage())
                 .popularity(movie.getPopularity())
-                .release_date(movie.getRelease_date())
+                .release_date(formatDate(movie.getRelease_date()))
                 .vote_avg(movie.getVote_avg())
                 .vote_count(movie.getVote_count())
-                .production_company(movie.getProduction_company()).build();
+                .production_company(movie.getProduction_company())
+                .poster(movie.getPoster()).build();
+    }
+    private String formatDate(Date inpDate) {
+        String pattern = "yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        return simpleDateFormat.format(inpDate);
     }
 }

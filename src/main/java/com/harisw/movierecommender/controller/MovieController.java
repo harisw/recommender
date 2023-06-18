@@ -43,7 +43,7 @@ public class MovieController {
         @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = Movie.class), mediaType = "application/json") }),
         @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) }),
         @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
-    @GetMapping("/")
+    @GetMapping("")
     @ResponseStatus(HttpStatus.OK)
     public List<MovieResponse> getMovies(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
         return movieService.get(page != null ? page : 0, limit != null ? limit : 1);

@@ -27,6 +27,7 @@ public class Movie {
     private Date release_date;
     private Float vote_avg;
     private Integer vote_count;
+    private String poster;
     @ManyToOne
     @JoinColumn(name = "production_company_id", referencedColumnName = "id")
     private ProductionCompany production_company;

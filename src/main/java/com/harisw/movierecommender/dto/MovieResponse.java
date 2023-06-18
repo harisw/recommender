@@ -8,8 +8,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -20,8 +18,9 @@ public class MovieResponse {
     private String overview;
     private Language language;
     private Float popularity;
-    private Date release_date;
+    private String release_date;
     private Float vote_avg;
     private Integer vote_count;
+    private String poster;
     private ProductionCompany production_company;
 }
