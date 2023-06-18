@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name="Movie", description = "Movie Endpoints")
 @RestController
 @RequestMapping("/movie")
@@ -32,5 +34,18 @@ public class MovieController {
     @ResponseStatus(HttpStatus.OK)
     public MovieResponse getMovie(@PathVariable("movie_id") Integer movie_id) {
         return movieService.get(movie_id);
+    }
+
+    @Operation(summary = "Retrieve all movie paginated",
+    description = "Get all movie collections in pagination",
+    tags = {"Movie"})
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", content = { @Content(schema = @Schema(implementation = Movie.class), mediaType = "application/json") }),
+        @ApiResponse(responseCode = "404", content = { @Content(schema = @Schema()) }),
+        @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
+    @GetMapping("/")
+    @ResponseStatus(HttpStatus.OK)
+    public List<MovieResponse> getMovies(@RequestParam("page") Integer page, @RequestParam("limit") Integer limit) {
+        return movieService.get(page != null ? page : 0, limit != null ? limit : 1);
     }
 }
